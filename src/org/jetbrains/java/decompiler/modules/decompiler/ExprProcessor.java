@@ -241,7 +241,14 @@ public class ExprProcessor implements CodeConstants {
         case opc_ldc2_w:
           PooledConstant cn = pool.getConstant(instr.operand(0));
           if (cn instanceof PrimitiveConstant) {
-            pushEx(stack, exprlist, new ConstExprent(consts[cn.type - CONSTANT_Integer], ((PrimitiveConstant)cn).value, bytecode_offsets));
+            // FIX: Additional checks to resolve the VarType to account for
+            //      constants that aren't aligned to the `consts` table.  Simply
+            //      check if the type is a CONSTANT_(MethodType|Module|Package)
+            //      and manually set it to a string.
+            VarType varType = (cn.type == CONSTANT_MethodType || cn.type ==  CONSTANT_Module || cn.type ==  CONSTANT_Package)
+              ? VarType.VARTYPE_STRING
+              : consts[cn.type - CONSTANT_Integer];
+            pushEx(stack, exprlist, new ConstExprent(varType, ((PrimitiveConstant)cn).value, bytecode_offsets));
           }
           else if (cn instanceof LinkConstant && cn.type == CodeConstants.CONSTANT_Dynamic) {
             LinkConstant invoke_constant = (LinkConstant) cn;
