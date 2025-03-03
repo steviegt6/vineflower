@@ -1,8 +1,6 @@
 ## Gradle
 /.gradle/
-/buildSrc/.gradle/
 /build/
-/buildSrc/build/
 
 ## IDEA
 /.idea/

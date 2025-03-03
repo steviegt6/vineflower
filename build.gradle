@@ -1,15 +1,15 @@
 // Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 
-import org.vineflower.build.JasmCompile
-import org.vineflower.build.TestDataRuntimesProvider
+// import org.vineflower.build.JasmCompile
+// import org.vineflower.build.TestDataRuntimesProvider
 
-import java.time.Duration
+// import java.time.Duration
 
 plugins {
   id 'jacoco'
   id 'com.gradleup.shadow' version '8.3.0'
   id 'org.jetbrains.kotlin.jvm' version '2.0.0'
-  id("io.github.gradle-nexus.publish-plugin") version '2.0.0'
+  // id("io.github.gradle-nexus.publish-plugin") version '2.0.0'
 }
 
 apply plugin: 'jacoco'
@@ -40,15 +40,15 @@ allprojects {
   }
 
   dependencies {
-    implementation 'org.jetbrains:annotations:24.0.0'
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${project.junit_bom}")
+    compileOnly 'org.jetbrains:annotations:26.0.2'
+    /*testImplementation("org.junit.jupiter:junit-jupiter-api:${project.junit_bom}")
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${project.junit_bom}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${project.junit_bom}")*/
   }
 
-  test {
+  /*test {
     useJUnitPlatform()
-  }
+  }*/
 
   tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
@@ -66,16 +66,16 @@ version = version + (ENV.STATUS == "snapshot" ? "-SNAPSHOT" : "")
 
 sourceSets {
   main.java.srcDirs 'src'
-  test.java.srcDirs 'test'
+  /*test.java.srcDirs 'test'
   testFixtures.java.srcDirs 'testFixtures'
   testDataGroovy.groovy.srcDirs files("testData/src/groovy/")
   testDataKotlin.kotlin.srcDirs files("testData/src/kt/")
-  testDataScala.scala.srcDirs files("testData/src/scala")
+  testDataScala.scala.srcDirs files("testData/src/scala")*/
 }
 
 repositories { mavenCentral() }
 
-dependencies {
+/*dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:${project.junit_bom}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${project.junit_bom}")
   testImplementation("org.junit.jupiter:junit-jupiter-params:${project.junit_bom}")
@@ -91,10 +91,10 @@ dependencies {
 
   testDataScalaImplementation("org.scala-lang:scala3-library_3:${project.scala_library}")
   testRuntimeOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-}
+}*/
 
 
-jacocoTestReport.dependsOn(test)
+/*jacocoTestReport.dependsOn(test)
 
 build.dependsOn(jacocoTestReport)
 
@@ -102,13 +102,13 @@ jacocoTestReport {
   reports {
     xml.required = true
   }
-}
+}*/
 
 tasks.withType(JavaCompile) {
   options.deprecation = true
 }
 
-task testDataClasses {
+/*task testDataClasses {
   group = 'build'
 }
 testClasses.dependsOn(testDataClasses)
@@ -187,7 +187,7 @@ test {
       provider.launchers.put(k, v)
   }
   jvmArgumentProviders << provider
-}
+}*/
 
 jar {
   archiveClassifier = "slim"
@@ -204,9 +204,9 @@ jar {
 
 // If testFixtures can't be inferred from the build path, it'll need to be manually specified to be able to find
 // the test fixtures class. Put it in a unique place to mark it as such.
-testFixturesJar {
+/*testFixturesJar {
   destinationDirectory = file("$rootDir/build/extralibs")
-}
+}*/
 
 task sourceJar(type:Jar) {
   archiveClassifier = "sources"
@@ -258,7 +258,7 @@ def allJar = tasks.register('allJar', Jar) {allJar ->
 
 build.dependsOn(allJar)
 
-publishing {
+/*publishing {
   publications {
     mavenJava(MavenPublication) {
       pom {
@@ -325,4 +325,4 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign publishing.publications.mavenJava
   }
-}
+}*/

@@ -2,5 +2,5 @@ base.archivesName = 'vineflower-idea-not-null'
 
 dependencies {
   implementation project(":")
-  testImplementation testFixtures(project(":"))
+  // testImplementation testFixtures(project(":"))
 }

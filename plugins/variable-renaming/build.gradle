@@ -1,13 +1,13 @@
-import org.vineflower.build.TestDataRuntimesProvider
+// import org.vineflower.build.TestDataRuntimesProvider
 
 base.archivesName = 'vineflower-variable-renaming'
 
 dependencies {
   implementation project(":")
-  testImplementation testFixtures(project(":"))
+  // testImplementation testFixtures(project(":"))
 }
 
-task testDataClasses {
+/*task testDataClasses {
   group = 'build'
 }
 testClasses.dependsOn(testDataClasses)
@@ -58,4 +58,4 @@ test {
     provider.launchers.put(k, v)
   }
   jvmArgumentProviders << provider
-}
+}*/

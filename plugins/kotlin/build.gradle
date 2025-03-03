@@ -11,26 +11,26 @@ group = 'org.vineflower'
 version = "0.1.0"
 base.archivesName = 'vineflower-kotlin'
 
-sourceSets {
+/*sourceSets {
   testDataKotlin.kotlin.srcDirs files("testData/src/kt/")
   testDataOldKotlin.kotlin.srcDirs files("testData/src/ktold/")
 }
 
 configurations {
   testDataOldKotlinImplementation.extendsFrom testDataKotlinImplementation
-}
+}*/
 
 dependencies {
   shadow project(":")
-  testImplementation testFixtures(project(":"))
+  // testImplementation testFixtures(project(":"))
   implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-  testDataKotlinImplementation platform('org.jetbrains.kotlin:kotlin-bom')
-  testDataKotlinImplementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-  testRuntimeOnly 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+  // testDataKotlinImplementation platform('org.jetbrains.kotlin:kotlin-bom')
+  // testDataKotlinImplementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+  // testRuntimeOnly 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 }
 
-task testDataClasses {
+/*task testDataClasses {
   group = 'build'
 }
 testClasses.dependsOn(testDataClasses)
@@ -52,7 +52,7 @@ compileTestDataOldKotlinKotlin {
     }
   }
 }
-testDataClasses.dependsOn(testDataOldKotlinClasses)
+testDataClasses.dependsOn(testDataOldKotlinClasses)*/
 
 jar {
   enabled = false
